@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\UsersController;
+
+Route::get('/users/{id}', 'UsersController@view');
 
 Auth::routes();
 

@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 
 # 1. Install development packages and clean up apt cache.
 RUN apt-get update && apt-get install -y \
@@ -36,10 +36,10 @@ RUN docker-php-ext-install \
     calendar \
     iconv \
     intl \
-    mbstring \
+    #mbstring \
     opcache \
-    pdo_mysql \
-    zip
+    pdo_mysql 
+    #zip
 
 # 5. Composer.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
