@@ -20,8 +20,12 @@ services:
           - app
 
   mysql-db:
-    image: mysql:5.7
+    image: mysql:5.7.22
     container_name: mysql-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3306:3306
     volumes:
       - ./run/var:/var/lib/mysql
     environment:
@@ -37,3 +41,5 @@ services:
 networks:
   backend:
     name: backend-network
+  app-network:
+    driver: bridge
