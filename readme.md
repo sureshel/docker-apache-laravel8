@@ -26,7 +26,7 @@ docker-compose up
 
 ### Laravel container - Install Composer and Key Generation
 ```
-$ docker exec -it YOUR_CONATINER_ID/NAME bash
+$ docker exec -it YOUR_LARAVEL_CONATINER_ID/NAME bash
 user@11111:/var/www/html$ composer install
 user@11111:/var/www/html$ php artisan key:generate
 ```
