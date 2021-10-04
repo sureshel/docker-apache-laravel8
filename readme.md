@@ -33,6 +33,11 @@ user@11111:/var/www/html$ php artisan key:generate
 ### Get or Update Database credentials
 The Database credentials can be found for root user in docker-compose.yml file. If you want to create a new user in DB for Laravel website application you can do so by logging into the DB using root credentials. If not, you can use the root user for development purpose only.
 
+You can also connect to mysql DB using any mysql client. Please run docker ps to check the hsot and port
+DB host: localhost
+Port: 3306
+Get the credentails from .env file for docker-compose file.
+
 ### MYSQL DB container
 ```
 $ docker exec -it YOUR_MYSQL_CONATINER_ID/NAME bash
@@ -44,12 +49,16 @@ Once you enter the correct password you will get into the MySQL server. You can 
 mysql>
 ```
 
+
 ### Create Tables - Laravel Migrations 
 ```
 $ docker exec -it YOUR_LARAVEL_CONATINER_ID/NAME bash
 user@11111:/var/www/html$ php artisan migrate
-mysql>
 ```
+Your Laravel Website should be up and running. Try the below urls, register as a new user and check your mysql database.
+http://localhost:8000/login
+http://localhost:8000/register
+
 
 ## Helper scripts
 Running `composer`, `php artisan` or `phpunit` against the `php` container with helper scripts in the main directory:
