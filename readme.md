@@ -8,8 +8,8 @@ The images used in this repo is `php:7.2-apache` and `mysql:5.7`. The goal is to
 ## Up and running
 Clone the repo:
 ```
-$ git clone https://github.com/laravel/laravel.git
-$ cd laravel
+$ git clone https://github.com/sureshel/docker-apache-laravel8
+$ cd docker-apache-laravel8
 ```
 
 Copy `.env.example` to `.env`
@@ -20,24 +20,39 @@ $ cp .env.example .env
 Build the images and start the services:
 ```
 docker-compose build
-docker-compose up -d
+docker-compose up
+```
+
+
+### Laravel container - Install Composer and Key Generation
+```
+$ docker exec -it YOUR_CONATINER_ID/NAME bash
+user@11111:/var/www/html$ composer install
+user@11111:/var/www/html$ php artisan key:generate
+```
+### Get or Update Database credentials
+The Database credentials can be found for root user in docker-compose.yml file. If you want to create a new user in DB for Laravel website application you can do so by logging into the DB using root credentials. If not, you can use the root user for development purpose only.
+
+### MYSQL DB container
+```
+$ docker exec -it YOUR_MYSQL_CONATINER_ID/NAME bash
+user@11111:/var/www/html$ root@1558bf84bbf2:/# mysql -uroot -p
+Enter password:
+```
+Once you enter the correct password you will get into the MySQL server. You can create new users with specific grants/priviledges.
+```
+mysql>
+```
+
+### Create Tables - Laravel Migrations 
+```
+$ docker exec -it YOUR_LARAVEL_CONATINER_ID/NAME bash
+user@11111:/var/www/html$ php artisan migrate
+mysql>
 ```
 
 ## Helper scripts
 Running `composer`, `php artisan` or `phpunit` against the `php` container with helper scripts in the main directory:
-
-### container
-Running `./container` takes you inside the `laravel-app` container under user uid(1000) (same with host user)
-```
-$ ./container
-devuser@8cf37a093502:/var/www/html$
-```
-### db
-Running `./db` connects to your database container's daemon using mysql client.
-```
-$ ./db
-mysql>
-```
 
 ### composer
 Run `composer` command, example:
